@@ -18,7 +18,6 @@ import jakarta.transaction.Transactional
 import org.springframework.cache.Cache
 import org.springframework.cache.CacheManager
 import org.springframework.cache.annotation.Cacheable
-import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 
 @Service
@@ -26,25 +25,10 @@ class AutomationService(
   private val cacheManager: CacheManager,
   private val entityManager: EntityManager,
   private val automationRepository: AutomationRepository,
-  @Suppress("SelfReferenceConstructorParameter") @Lazy
-  private val self: AutomationService,
 ) {
-  @Transactional
-  fun getProjectAutomations(
-    projectId: Long,
-    automationTriggerType: AutomationTriggerType,
-    activityType: ActivityType? = null,
-  ): List<AutomationDto> {
-    val forNullActivityType = self.getProjectAutomationsCaching(projectId, automationTriggerType, null)
-    if (activityType == null) {
-      return forNullActivityType
-    }
-    return self.getProjectAutomationsCaching(projectId, automationTriggerType, activityType) + forNullActivityType
-  }
-
   @Cacheable(value = [Caches.AUTOMATIONS], key = "{#projectId, #automationTriggerType, #activityType}")
   @Transactional
-  fun getProjectAutomationsCaching(
+  fun getProjectAutomations(
     projectId: Long,
     automationTriggerType: AutomationTriggerType,
     activityType: ActivityType? = null,
@@ -224,7 +208,7 @@ class AutomationService(
   private fun getAutomationWithFetchedData(
     projectId: Long,
     automationTriggerType: AutomationTriggerType,
-    activityType: ActivityType?,
+    activityType: ActivityType? = null,
   ): MutableList<Automation> {
     val automations = getAutomationsWithTriggerOfType(projectId, automationTriggerType, activityType)
 
@@ -247,7 +231,7 @@ class AutomationService(
           join a2.triggers at 
             where a2.project.id = :projectId
              and at.type = :automationTriggerType
-             and (at.activityType = :activityType or (:activityType is null and at.activityType is null))
+             and (at.activityType = :activityType or at.activityType is null)
       )
       """.trimIndent(),
       Automation::class.java,

@@ -9,7 +9,6 @@ import { SelfHostedEeEstimatedCosts } from './SelfHostedEeEstimatedCosts';
 import { ActivePlanTitle } from './ActivePlanTitle';
 import { useTranslate } from '@tolgee/react';
 import { Box } from '@mui/material';
-import { PlanDescription } from './PlanDescription';
 
 type SelfHostedEeSubscriptionModel =
   components['schemas']['SelfHostedEeSubscriptionModel'];
@@ -26,10 +25,16 @@ export const SelfHostedEeActiveSubscription: FC<Props> = ({
   const period = subscription.currentBillingPeriod;
   const { t } = useTranslate();
 
-  const hasPrice = Boolean(
+  const hasFixedPrice = Boolean(
     subscription.plan.prices.subscriptionMonthly ||
       subscription.plan.prices.subscriptionYearly
   );
+
+  const description = !hasFixedPrice
+    ? t('billing_subscriptions_pay_for_what_you_use')
+    : t('billing_subscriptions_pay_fixed_price', {
+        includedSeats: subscription.plan.includedUsage.seats,
+      });
 
   return (
     <Plan
@@ -51,16 +56,8 @@ export const SelfHostedEeActiveSubscription: FC<Props> = ({
         <SelfHostedEeEstimatedCosts subscription={subscription} />
 
         <PlanInfoArea>
-          <Box>
-            <PlanDescription
-              free={subscription.plan.free}
-              hasPrice={hasPrice}
-            />
-          </Box>
-          <IncludedFeatures
-            features={subscription.plan.enabledFeatures}
-            includedUsage={subscription.plan.includedUsage}
-          />
+          <Box>{description}</Box>
+          <IncludedFeatures features={subscription.plan.enabledFeatures} />
         </PlanInfoArea>
 
         <PlanPrice prices={subscription.plan.prices} period={period} />

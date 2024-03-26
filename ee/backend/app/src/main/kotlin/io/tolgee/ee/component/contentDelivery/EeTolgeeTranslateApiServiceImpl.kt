@@ -46,7 +46,7 @@ class EeTolgeeTranslateApiServiceImpl(
       }
     } catch (e: BadRequest) {
       if (e.message?.contains(Message.CREDIT_SPENDING_LIMIT_EXCEEDED.code) == true) {
-        throw OutOfCreditsException(OutOfCreditsException.Reason.SPENDING_LIMIT_EXCEEDED, e)
+        throw OutOfCreditsException(OutOfCreditsException.Reason.SPENDING_LIMIT_EXCEEDED)
       }
       if (e.message?.contains(Message.SUBSCRIPTION_NOT_ACTIVE.code) == true) {
         eeSubscriptionServiceImpl.checkSubscription()

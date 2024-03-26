@@ -31,7 +31,6 @@ declare namespace DataCy {
         "administration-ee-license-key-input" |
         "administration-ee-license-release-key-button" |
         "administration-ee-plan-field-feature" |
-        "administration-ee-plan-field-free" |
         "administration-ee-plan-field-included-mt-credits" |
         "administration-ee-plan-field-included-seats" |
         "administration-ee-plan-field-name" |

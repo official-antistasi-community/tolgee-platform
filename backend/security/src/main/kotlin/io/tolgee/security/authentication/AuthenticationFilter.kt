@@ -19,7 +19,6 @@ package io.tolgee.security.authentication
 import io.tolgee.component.CurrentDateProvider
 import io.tolgee.configuration.tolgee.AuthenticationProperties
 import io.tolgee.constants.Message
-import io.tolgee.dtos.cacheable.UserAccountDto
 import io.tolgee.exceptions.AuthenticationException
 import io.tolgee.security.PAT_PREFIX
 import io.tolgee.security.ratelimit.RateLimitService
@@ -67,7 +66,7 @@ class AuthenticationFilter(
   }
 
   override fun shouldNotFilter(request: HttpServletRequest): Boolean {
-    return request.method == "OPTIONS"
+    return !authenticationProperties.enabled || request.method == "OPTIONS"
   }
 
   private fun doAuthenticate(request: HttpServletRequest) {
@@ -92,18 +91,6 @@ class AuthenticationFilter(
       // Attempt PAK auth even if it doesn't have the prefix
       // Might be a legacy key
       pakAuth(apiKey)
-      return
-    }
-
-    // even if the authentication is disabled, they still might be using PAK for in-context editing,
-    // so we still need to try tho authenticate using API key, to have API key authentication in the security context
-    if (!authenticationProperties.enabled) {
-      SecurityContextHolder.getContext().authentication =
-        TolgeeAuthentication(
-          null,
-          initialUser,
-          TolgeeAuthenticationDetails(true),
-        )
     }
   }
 
@@ -155,12 +142,5 @@ class AuthenticationFilter(
         userAccount,
         TolgeeAuthenticationDetails(false),
       )
-  }
-
-  private val initialUser by lazy {
-    val account =
-      userAccountService.findInitialUser()
-        ?: throw IllegalStateException("Initial user does not exists")
-    UserAccountDto.fromEntity(account)
   }
 }

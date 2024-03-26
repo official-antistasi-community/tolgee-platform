@@ -392,12 +392,6 @@ export const setProperty = (name: string, value: any) =>
     },
   });
 
-export const setBypassSeatCountCheck = (value: boolean) =>
-  internalFetch('bypass-seat-count-check/set', {
-    method: 'PUT',
-    qs: { value: value ? 'true' : 'false' },
-  });
-
 export const getRecaptchaSiteKey = () => {
   return apiFetch('public/configuration').then(
     (res) => res.body.recaptchaSiteKey

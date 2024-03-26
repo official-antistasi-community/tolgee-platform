@@ -30,7 +30,6 @@ type FormData = {
   enabledFeatures: EnabledFeature[];
   public: boolean;
   forOrganizationIds: number[];
-  free: boolean;
 };
 
 type Props = {
@@ -65,7 +64,6 @@ export function EePlanForm({ planId, initialData, onSubmit, loading }: Props) {
         enabledFeatures: initialData.enabledFeatures,
         public: initialData.public,
         forOrganizationIds: initialData.forOrganizationIds,
-        free: initialData.free,
       }}
       enableReinitialize
       onSubmit={onSubmit}
@@ -230,17 +228,6 @@ export function EePlanForm({ planId, initialData, onSubmit, loading }: Props) {
               }
               data-cy="administration-ee-plan-field-public"
               label={t('administration_ee_plan_field_public')}
-            />
-
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={values.free}
-                  onChange={() => setFieldValue('free', !values.free)}
-                />
-              }
-              data-cy="administration-ee-plan-field-free"
-              label={t('administration_ee_plan_field_free')}
             />
 
             {!values.public && (

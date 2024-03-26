@@ -1,7 +1,7 @@
 spring:
   autoconfigure:
     exclude:
-      - org.redisson.spring.starter.RedissonAutoConfigurationV2
+      - org.redisson.spring.starter.RedissonAutoConfiguration
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
   jpa:
     show-sql: true
@@ -90,5 +90,3 @@ logging:
     io.tolgee: DEBUG
     io.tolgee.component.CurrentDateProvider: DEBUG
     io.tolgee.component.reporting.BusinessEventPublisher: DEBUG
-    io.tolgee.component.reporting.ReportingService: DEBUG
-    org.springframework.boot.autoconfigure.logging: DEBUG

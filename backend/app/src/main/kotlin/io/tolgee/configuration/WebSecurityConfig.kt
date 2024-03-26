@@ -18,6 +18,7 @@ package io.tolgee.configuration
 
 import io.tolgee.component.ExceptionHandlerFilter
 import io.tolgee.component.TransferEncodingHeaderDebugFilter
+import io.tolgee.security.authentication.AuthenticationDisabledFilter
 import io.tolgee.security.authentication.AuthenticationFilter
 import io.tolgee.security.authentication.AuthenticationInterceptor
 import io.tolgee.security.authorization.OrganizationAuthorizationInterceptor
@@ -47,6 +48,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @EnableWebSecurity
 class WebSecurityConfig(
   private val authenticationFilter: AuthenticationFilter,
+  private val authenticationDisabledFilter: AuthenticationDisabledFilter,
   private val globalIpRateLimitFilter: GlobalIpRateLimitFilter,
   private val globalUserRateLimitFilter: GlobalUserRateLimitFilter,
   private val rateLimitInterceptor: RateLimitInterceptor,
@@ -64,6 +66,7 @@ class WebSecurityConfig(
       .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
       .addFilterBefore(exceptionHandlerFilter, UsernamePasswordAuthenticationFilter::class.java)
       .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
+      .addFilterBefore(authenticationDisabledFilter, UsernamePasswordAuthenticationFilter::class.java)
       .addFilterBefore(globalUserRateLimitFilter, UsernamePasswordAuthenticationFilter::class.java)
       .addFilterBefore(globalIpRateLimitFilter, UsernamePasswordAuthenticationFilter::class.java)
       .authorizeHttpRequests {
