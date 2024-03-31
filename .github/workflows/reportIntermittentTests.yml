@@ -1,8 +1,8 @@
 name: Report intermittent E2E Tests
 
-on:
-  schedule:
-    - cron: '42 04 * * *'
+#on:
+#  schedule:
+#    - cron: '42 04 * * *'
 
 jobs:
   backend-build:
