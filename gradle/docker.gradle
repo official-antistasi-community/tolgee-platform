@@ -1,4 +1,4 @@
-ext {
+runE2eext {
     dockerPath = buildDir.absolutePath + "/docker"
 }
 
