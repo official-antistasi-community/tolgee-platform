@@ -48,7 +48,7 @@ jobs:
           tar -czf ~/ee-backend-app.tgz ./ee/backend/app/build
           tar -czf ~/ee-backend-tests.tgz ./ee/backend/tests/build
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: backend
@@ -133,7 +133,7 @@ jobs:
           reportName=${{ matrix.command }}
           echo "reportName=${reportName//\:/_}" >> $GITHUB_OUTPUT
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: backend_test_reports_${{ steps.version.outputs.reportName }}
@@ -244,7 +244,7 @@ jobs:
 #          E2E_TOTAL_JOBS: ${{matrix.total_jobs}}
 #          E2E_JOB_INDEX: ${{matrix.job_index}}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: e2e
@@ -253,7 +253,7 @@ jobs:
             ./e2e/cypress/screenshots/**/*
             ./e2e/server
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: e2e_server_log_${{ matrix.job_index }}
@@ -297,7 +297,7 @@ jobs:
           TOLGEE_API_URL: ${{secrets.TOLGEE_API_URL}}
 
       - name: Upload built webapp
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: webapp
           path: webapp/dist
@@ -403,7 +403,7 @@ jobs:
           tar -czf ~/cypress_cache.tgz ./Cypress
         working-directory: /home/runner/.cache/
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: e2e_deps
