@@ -45,8 +45,6 @@ jobs:
           tar -czf ~/backend-security.tgz ./backend/security/build
           tar -czf ~/backend-testing.tgz ./backend/testing/build
           tar -czf ~/backend-development.tgz ./backend/development/build
-          tar -czf ~/ee-backend-app.tgz ./ee/backend/app/build
-          tar -czf ~/ee-backend-tests.tgz ./ee/backend/tests/build
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -60,8 +58,6 @@ jobs:
             ~/backend-security.tgz
             ~/backend-testing.tgz
             ~/backend-development.tgz
-            ~/ee-backend-app.tgz
-            ~/ee-backend-tests.tgz
 
   backend-test:
     name: BT ‍🔎
@@ -113,8 +109,6 @@ jobs:
           tar -xzf ~/backend-security.tgz ./backend/security/build
           tar -xzf ~/backend-testing.tgz ./backend/testing/build
           tar -xzf ~/backend-development.tgz ./backend/development/build
-          tar -xzf ~/ee-backend-app.tgz ./ee/backend/app/build
-          tar -xzf ~/ee-backend-tests.tgz ./ee/backend/tests/build
 
       - name: Run backend tests
         uses: nick-fields/retry@v2
@@ -146,6 +140,7 @@ jobs:
           name: Backend Tests
           path: "**/build/test-results/**/TEST-*.xml"
           reporter: java-junit
+
 
   frontend-build:
     name: Build frontend 🏗️
