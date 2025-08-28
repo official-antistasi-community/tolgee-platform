@@ -135,7 +135,7 @@ jobs:
           reportName="$(echo "$reportName" | sed 's/:/_/g')"
           echo "reportName=$reportName" >> "$GITHUB_ENV"
           echo "$reportName"
-          echo "$GITHUB_OUTPUT"
+          cat $GITHUB_OUTPUT
 
       - uses: actions/upload-artifact@v4
         if: always()
