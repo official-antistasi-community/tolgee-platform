@@ -46,7 +46,7 @@
     ],
     "branches": [
       {
-        "name": "main",
+        "name": "antistasi-main",
         "channel": "latest",
         "prerelease": false
       },
