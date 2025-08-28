@@ -41,7 +41,7 @@ def getE2eTestsToRun() {
 task waitForRunningContainer(type: Task, group: "e2e") {
     doLast {
         while (true) {
-            def pb = new ProcessBuilder("docker-compose", "logs", "-f")
+            def pb = new ProcessBuilder("docker compose", "logs", "-f")
             pb.directory(new File(E2E_DIR))
             def proc = pb.start()
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()))
@@ -53,7 +53,7 @@ task waitForRunningContainer(type: Task, group: "e2e") {
                 }
             }
             if (proc.exitValue() != 0) {
-                throw new RuntimeException("Docker-compose logs retuned non zero exit code")
+                throw new RuntimeException("Docker compose logs retuned non zero exit code")
             }
         }
     }
@@ -82,7 +82,7 @@ task runE2e(type: Exec, group: "e2e") {
 }
 
 task saveServerLogs(type: Exec, group: "e2E"){
-    commandLine "bash", "-c", "docker-compose logs > server.log"
+    commandLine "bash", "-c", "docker compose logs > server.log"
     workingDir E2E_DIR
 }
 
@@ -122,23 +122,23 @@ task runWebAppNpmStartE2eDev(type: Exec, group: "e2e") {
 
 task runDockerE2e(type: Exec, group: "e2e") {
     dependsOn "tagDockerLocal"
-    commandLine "docker-compose", "up", "-d"
+    commandLine "docker compose", "up", "-d"
     workingDir E2E_DIR
     finalizedBy "waitForRunningContainer"
 }
 
 task runDockerE2eDev(type: Exec, group: "e2e") {
-    commandLine "docker-compose", "up", "-d", "fakesmtp"
+    commandLine "docker compose", "up", "-d", "fakesmtp"
     workingDir E2E_DIR
 }
 
 task stopDockerE2e(type: Exec, group: "e2e") {
-    commandLine "docker-compose", "stop"
+    commandLine "docker compose", "stop"
     workingDir E2E_DIR
 }
 
 task cleanupDockerE2e(type: Exec, group: "e2e") {
-    commandLine "docker-compose", "rm", "-f"
+    commandLine "docker compose", "rm", "-f"
     workingDir E2E_DIR
 }
 
