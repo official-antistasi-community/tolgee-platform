@@ -133,14 +133,14 @@ jobs:
         run: |
           reportName=${{ matrix.command }}
           reportName="$(echo "$reportName" | sed 's/:/_/g')"
-          echo "reportName=$reportName" >> "$GITHUB_ENV"
+          echo "reportName=$reportName" >> "$GITHUB_OUTPUT"
           echo "$reportName"
-          cat $GITHUB_OUTPUT
+          echo "$(cat $GITHUB_OUTPUT)"
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: backend_test_reports_${{ steps.version.outputs.reportName }}
+          name: backend_test_reports_${{ steps.reportName.outputs.reportName }}
           path: |
             ./**/build/reports/**/*
 
