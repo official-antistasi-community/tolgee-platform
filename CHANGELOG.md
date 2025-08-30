@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/official-antistasi-community/tolgee-platform/compare/v1.0.1...v1.1.0) (2025-08-30)
+
+
+### Bug Fixes
+
+* removed hotfix messages at release ([38b6693](https://github.com/official-antistasi-community/tolgee-platform/commit/38b6693ab47d493001972fcf8a74aa7ea2fa4d01))
+
+
+### Features
+
+* Proper release-path is set ([904e82d](https://github.com/official-antistasi-community/tolgee-platform/commit/904e82d5ae3b29385657f606aa039bc5924bc10c))
+
 ## [1.0.1](https://github.com/official-antistasi-community/tolgee-platform/compare/v1.0.0...v1.0.1) (2025-08-30)
 
 
