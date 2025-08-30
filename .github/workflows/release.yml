@@ -55,7 +55,7 @@ jobs:
 
       - name: Login to docker
         if: ${{ steps.version.outputs.VERSION != '' }}
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p "${{ secrets.DOCKERHUB_PASSWORD }}" "https://${{secrets.DOCKER_REGISTRY}}"
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p "${{ secrets.DOCKERHUB_PASSWORD }}" "${{secrets.DOCKER_REGISTRY}}"
 
       - name: Prepare for docker build
         if: ${{ steps.version.outputs.VERSION != '' }}
