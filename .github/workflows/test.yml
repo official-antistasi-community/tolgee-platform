@@ -2,7 +2,8 @@ name: Test
 
 on:
   push:
-    branches: [main, release, antistasi-main]
+#    branches: [main, release, antistasi-main]
+        branches: [main, release]
   pull_request:
 
 

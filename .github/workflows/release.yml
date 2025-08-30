@@ -3,7 +3,7 @@ name: Release
 on:
   workflow_run:
     workflows: [ "Test" ]
-    branches: [ "main", "next" , "antistasi-main" ]
+    branches: [ "main", "next" ]
     types:
       - completed
   workflow_dispatch:
