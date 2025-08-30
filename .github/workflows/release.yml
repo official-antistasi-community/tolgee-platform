@@ -1,9 +1,12 @@
 name: Release
 
 on:
-  push:
-    branches: [main, release, antistasi-main]
-  pull_request:
+  workflow_run:
+    workflows: [ "Test" ]
+    branches: [ "main", "next" , "antistasi-main" ]
+    types:
+      - completed
+  workflow_dispatch:
 
 jobs:
   main:
