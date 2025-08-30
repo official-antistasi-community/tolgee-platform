@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/official-antistasi-community/tolgee-platform/compare/v1.0.0...v1.0.1) (2025-08-30)
+
+
+### Bug Fixes
+
+* removed deployment-testing ([1c4c476](https://github.com/official-antistasi-community/tolgee-platform/commit/1c4c476279ce18bfcf402fb54a8b791459773126))
+
 # 1.0.0 (2025-08-30)
 
 
