@@ -3,7 +3,7 @@ name: Release
 on:
   workflow_run:
     workflows: [ "Test" ]
-    branches: [ "main", "next" ]
+    branches: [ "main", "next", "antistasi-main" ]
     types:
       - completed
   workflow_dispatch:
@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-#        with:
-#          token: '${{ secrets.TOLGEE_MACHINE_PAT }}'
 
       - uses: actions/setup-java@v3
         with:
