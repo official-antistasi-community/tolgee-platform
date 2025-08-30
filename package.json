@@ -23,7 +23,8 @@
           "assets": [
             "CHANGELOG.md",
             "webapp/src/i18n"
-          ]
+          ],
+          "message": "Release: ${ nextRelease.version }"
         }
       ],
       [
@@ -34,8 +35,7 @@
               "path": "./build/libs/tolgee.jar",
               "name": "tolgee-${ nextRelease.version }.jar"
             }
-          ],
-          "message": "Release: ${ nextRelease.version }"
+          ]
         }
       ],
       [
