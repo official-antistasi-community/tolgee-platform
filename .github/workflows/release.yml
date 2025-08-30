@@ -1,13 +1,9 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: [ "Test" ]
-    branches: [ "main", "next" , "antistasi-main" ]
-    types:
-      - completed
-  workflow_dispatch:
-
+  push:
+    branches: [main, release, antistasi-main]
+  pull_request:
 
 jobs:
   main:
@@ -55,7 +51,7 @@ jobs:
 
       - name: Login to docker
         if: ${{ steps.version.outputs.VERSION != '' }}
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p "${{ secrets.DOCKERHUB_PASSWORD }}" "${{secrets.DOCKER_REGISTRY}}"
+        run: docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}" "${{secrets.DOCKER_REGISTRY}}"
 
       - name: Prepare for docker build
         if: ${{ steps.version.outputs.VERSION != '' }}
