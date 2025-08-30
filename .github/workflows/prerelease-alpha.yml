@@ -3,6 +3,7 @@ name: Release Pre-Release
 on:
   push:
     branches: [ "tolgee-3" , "antistasi-main" ]
+  workflow_dispatch:
 
 jobs:
   main:
