@@ -1,12 +1,12 @@
 name: Release
 
-on:
-  workflow_run:
-    workflows: [ "Test" ]
-    branches: [ "main", "next" , "antistasi-main" ]
-    types:
-      - completed
-  workflow_dispatch:
+#on:
+#  workflow_run:
+#    workflows: [ "Test" ]
+#    branches: [ "main", "next" , "antistasi-main" ]
+#    types:
+#      - completed
+#  workflow_dispatch:
 
 jobs:
   main:
@@ -54,7 +54,7 @@ jobs:
 
       - name: Login to docker
         if: ${{ steps.version.outputs.VERSION != '' }}
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p "${{ secrets.DOCKERHUB_PASSWORD }}"
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p "${{ secrets.DOCKERHUB_PASSWORD }}" "https://${{secrets.DOCKER_REGISTRY}}"
 
       - name: Prepare for docker build
         if: ${{ steps.version.outputs.VERSION != '' }}
@@ -68,8 +68,8 @@ jobs:
         if: ${{ steps.version.outputs.VERSION != '' }}
         run: |
           docker buildx create --use
-          docker buildx build . -t tolgee/tolgee:${{ steps.version.outputs.VERSION }} --platform linux/arm64,linux/amd64 --push
-          docker buildx build . -t tolgee/tolgee:latest --platform linux/arm64,linux/amd64 --push
+          docker buildx build . -t ${{secrets.DOCKER_REGISTRY}}/tolgee:${{ steps.version.outputs.VERSION }} --platform linux/arm64,linux/amd64 --push
+          docker buildx build . -t ${{secrets.DOCKER_REGISTRY}}/tolgee:latest --platform linux/arm64,linux/amd64 --push
         working-directory: build/docker
 
       - name: Pack with webapp
