@@ -35,7 +35,8 @@
               "path": "./build/libs/tolgee.jar",
               "name": "tolgee-${ nextRelease.version }.jar"
             }
-          ]
+          ],
+          "releaseBodyTemplate": "Release."
         }
       ],
       [
