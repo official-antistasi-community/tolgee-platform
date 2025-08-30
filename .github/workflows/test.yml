@@ -75,11 +75,11 @@ jobs:
         command:
           [
             "server-app:runContextRecreatingTests",
-#            "server-app:runStandardTests",
-#            "server-app:runWebsocketTests",
-#            "ee-test:test",
-#            "data:test",
-#            "security:test",
+            "server-app:runStandardTests",
+            "server-app:runWebsocketTests",
+            "ee-test:test",
+            "data:test",
+            "security:test",
           ]
     steps:
       - uses: actions/checkout@v3
