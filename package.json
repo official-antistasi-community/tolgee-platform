@@ -14,6 +14,7 @@
   },
   "release": {
     "plugins": [
+      "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
       [
@@ -33,7 +34,8 @@
               "path": "./build/libs/tolgee.jar",
               "name": "tolgee-${ nextRelease.version }.jar"
             }
-          ]
+          ],
+          "message": "Release: ${ nextRelease.version }"
         }
       ],
       [
