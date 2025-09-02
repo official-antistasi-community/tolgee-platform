@@ -57,6 +57,10 @@
       {
         "name": "tolgee-3",
         "prerelease": "alpha"
+      },
+      {
+        "name": "antistasi-next",
+        "prerelease": "alpha"
       }
     ]
   }
