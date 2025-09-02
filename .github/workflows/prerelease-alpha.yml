@@ -62,8 +62,7 @@ jobs:
         if: ${{ steps.version.outputs.VERSION != '' }}
         run: |
           docker buildx create --use
-          docker buildx build . -t ${{secrets.DOCKER_REGISTRY}}/tolgee:${{ steps.version.outputs.VERSION }} --platform linux/arm64,linux/amd64 --push
-          docker buildx build . -t ${{secrets.DOCKER_REGISTRY}}/tolgee:pre-release --platform linux/arm64,linux/amd64 --push
+          docker buildx build . -t ${{secrets.DOCKER_REGISTRY}}/tolgee:${{ steps.version.outputs.VERSION }} -t ${{secrets.DOCKER_REGISTRY}}/tolgee:pre-release --platform linux/arm64,linux/amd64 --push
         working-directory: build/docker
 
       - name: Pack with webapp
