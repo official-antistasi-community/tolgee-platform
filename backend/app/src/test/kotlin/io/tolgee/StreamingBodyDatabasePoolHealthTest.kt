@@ -69,13 +69,13 @@ class StreamingBodyDatabasePoolHealthTest : ProjectAuthControllerTest("/v2/proje
         val hikariDataSource = dataSource as HikariDataSource
         val pool = hikariDataSource.hikariPoolMXBean
 
-        pool.idleConnections.assert.isGreaterThan(70)
+        pool.idleConnections.assert.isGreaterThan(85)
         repeat(50) {
           performProjectAuthGet("export").andIsOk
           Thread.sleep(sleepBetweenMs)
         }
         waitForNotThrowing(pollTime = 50, timeout = 5000) {
-          pool.idleConnections.assert.isGreaterThan(70)
+          pool.idleConnections.assert.isGreaterThan(85)
         }
       } finally {
         sleepBetweenMs += 10
