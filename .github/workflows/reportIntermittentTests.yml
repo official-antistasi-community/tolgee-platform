@@ -124,7 +124,10 @@ jobs:
         id: reportName
         run: |
           reportName=${{ matrix.command }}
-          echo "reportName=${reportName//\:/_}" >> $GITHUB_OUTPUT
+          reportName="$(echo "$reportName" | sed 's/:/_/g')"
+          echo "reportName=$reportName" >> "$GITHUB_OUTPUT"
+          echo "$reportName"
+          echo "$(cat $GITHUB_OUTPUT)"
 
       - uses: actions/upload-artifact@v4
         if: always()
