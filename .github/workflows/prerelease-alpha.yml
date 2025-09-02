@@ -63,7 +63,8 @@ jobs:
         run: |
           docker buildx create --use
           docker buildx build . -t ${{secrets.DOCKER_REGISTRY}}/tolgee:${{ steps.version.outputs.VERSION }} --platform linux/arm64,linux/amd64 --push
-          docker buildx build . -t ${{secrets.DOCKER_REGISTRY}}/tolgee:pre-release --platform linux/arm64,linux/amd64 --push
+          docker tag ${{secrets.DOCKER_REGISTRY}}/tolgee:${{ steps.version.outputs.VERSION }} ${{secrets.DOCKER_REGISTRY}}/tolgee:pre-release
+          docker image push ${{secrets.DOCKER_REGISTRY}}/tolgee:pre-release
         working-directory: build/docker
 
       - name: Pack with webapp
