@@ -3,6 +3,20 @@
 
 ### Bug Fixes
 
+* **encoding:** line endings changed to lf from crlf ([c512719](https://github.com/official-antistasi-community/tolgee-platform/commit/c51271926c117cd45dff1c6da8b3be0e05921970))
+* reenabled tests for release ([f2e9d55](https://github.com/official-antistasi-community/tolgee-platform/commit/f2e9d5526d54a231a9663da0d85a063c54de02dd))
+
+
+### Features
+
+* Limit number of seats on free self-hosted instances ([#2103](https://github.com/official-antistasi-community/tolgee-platform/issues/2103)) ([732a033](https://github.com/official-antistasi-community/tolgee-platform/commit/732a033b1ad298b56b3ec0aeb3730ce28b789292))
+* Limit number of seats on free self-hosted instances ([#2103](https://github.com/official-antistasi-community/tolgee-platform/issues/2103)) reverted ([01b4a97](https://github.com/official-antistasi-community/tolgee-platform/commit/01b4a97daf4acf595343828f8e9068cd2f9973c1))
+
+# [1.2.0-alpha.1](https://github.com/official-antistasi-community/tolgee-platform/compare/v1.1.0...v1.2.0-alpha.1) (2025-09-02)
+
+
+### Bug Fixes
+
 * reenabled tests for release ([f2e9d55](https://github.com/official-antistasi-community/tolgee-platform/commit/f2e9d5526d54a231a9663da0d85a063c54de02dd))
 
 
